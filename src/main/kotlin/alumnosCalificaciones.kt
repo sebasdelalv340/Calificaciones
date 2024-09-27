@@ -55,23 +55,23 @@ fun main() {
                 alumno["Parcial1"]?.replace(",", ".")?.toDouble() ?: 0.0
             }
 
-
-
             val parcial2 = if (alumno["Parcial2"] != null && (alumno["Parcial2"]?.replace(",", ".")?.toDouble() ?: 0.0) < 4) {
                 alumno["Ordinario2"]?.replace(",", ".")?.toDouble() ?: 0.0
             } else {
                 alumno["Parcial2"]?.replace(",", ".")?.toDouble() ?: 0.0
             }
 
-            val practica = if (alumno["Practicas"] != null && (alumno["Practicas"]?.replace(",", ".")?.toDouble() ?: 0.0) < 4) {
+            val practica = if (alumno["Practicas"] != null && (((alumno["Practicas"]?.replace(",", ".")?.toDouble()
+                    ?: 0.0) <= (alumno["OrdinarioPracticas"]?.replace(",", ".")?.toDouble() ?: 0.0)))
+            ) {
                 alumno["OrdinarioPracticas"]?.replace(",", ".")?.toDouble() ?: 0.0
             } else {
                 alumno["Practicas"]?.replace(",", ".")?.toDouble() ?: 0.0
             }
 
-            val notaFinal = ((parcial1 + parcial2) * 0.3) + (practica * 0.4)
+            val notaFinal = (((parcial1 + parcial2) * 0.3) + (practica * 0.4)).toString()
 
-            alumno["NotaFinal"] = notaFinal.toString()
+            alumno["NotaFinal"] = notaFinal
             listaAlumnosNotaFinal.add(alumno)
         }
         /*for(i in listaAlumnosNotaFinal) {
